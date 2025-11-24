@@ -10,21 +10,7 @@ import java.util.Map;
 public class EmployeeService {
     public List<Employee> searchEmployees(Map<String, String> searchCriteria) {
         List<Employee> employees = new ArrayList<>();
-        StringBuilder sql = new StringBuilder("SELECT * FROM employees WHERE 1=1");
-        List<Object> parameters = new ArrayList<>();
-        
-        if (searchCriteria.containsKey("empid")) {
-            sql.append(" AND empid = ?");
-            parameters.add(searchCriteria.get("empid"));
-        }
-        if (searchCriteria.containsKey("ssn")) {
-            sql.append(" AND ssn = ?");
-            parameters.add(searchCriteria.get("ssn"));
-        }
-        if (searchCriteria.containsKey("name")) {
-            sql.append(" AND name LIKE ?");
-            parameters.add("%" + searchCriteria.get("name") + "%");
-        }
+        //Build SQL query based on search criteria
         
         try (Connection conn = SQLConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
@@ -175,3 +161,4 @@ public class EmployeeService {
     }
 
 }
+
