@@ -21,4 +21,8 @@ public class PayStatement {
         return amount;
     }
 
+    public String toString() {
+        return "Employee ID: " + employeeID + ", Pay Period: " + payPeriod + ", Amount: " + amount;
+    }
+
 }
