@@ -1,20 +1,21 @@
 public class Employee {
-    private int employeeID;
+    private String employeeID;
     private String name;
     private String jobTitle;
     private String division;
     private double salary;
     private String ssn;
 
-    public Employee(int employeeID, String name, String jobTitle, String division, double salary) {
+    public Employee(String employeeID, String name, String jobTitle, String ssn, String division, double salary) {
         this.employeeID = employeeID;
         this.name = name;
         this.jobTitle = jobTitle;
         this.division = division;
         this.salary = salary;
+        this.ssn = ssn;
     }
 
-    public int getEmployeeID() {
+    public String getEmployeeID() {
         return employeeID;
     }
 
@@ -40,6 +41,11 @@ public class Employee {
 
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+    public String toString() {
+        return "Employee ID: " + employeeID + ", Name: " + name + ", Job Title: " + jobTitle +
+               ", Division: " + division + ", Salary: " + salary;
     }
 
 }
