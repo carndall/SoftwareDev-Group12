@@ -1,15 +1,15 @@
 public class PayStatement {
-    private int employeeID;
+    private String employeeID;
     private String payPeriod;
     private double amount;
 
-    public PayStatement(int employeeID, String payPeriod, double amount) {
+    public PayStatement(String employeeID, String payPeriod, double amount) {
         this.employeeID = employeeID;
         this.payPeriod = payPeriod;
         this.amount = amount;
     }
 
-    public int getEmployeeID() {
+    public String getEmployeeID() {
         return employeeID;
     }
 

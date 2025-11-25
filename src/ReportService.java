@@ -16,7 +16,7 @@ public class ReportService {
         List<Employee> employees = employeeService.getAllEmployees();
 
         for (Employee emp : employees) {
-            List<PayStatement> payStatements = payStatementService.getPayStatementsByEmployeeID(Integer.parseInt(emp.getEmployeeID()));
+            List<PayStatement> payStatements = payStatementService.getPayStatementsByEmployeeID(emp.getEmployeeID());
             employeePayMap.put(emp, payStatements);
         }
 
@@ -56,7 +56,7 @@ public class ReportService {
             int psYear = Integer.parseInt(parts[1]);
 
             if (psYear == year && psMonth.equals(month)) {
-                Employee emp = employeeService.getEmployeeByID(String.valueOf(ps.getEmployeeID()));
+                Employee emp = employeeService.getEmployeeByID(ps.getEmployeeID());
                 String jobTitle = emp.getJobTitle();
                 double amount = ps.getAmount();
 
@@ -77,6 +77,22 @@ public class ReportService {
             for (PayStatement ps : payStatements) {
                 System.out.println("  " + ps.toString());
             }
+        }
+    }
+
+    public void printPayByDivision(int year, String month) {
+        Map<String, Double> payByDivision = generatePayByDivision(year, month);
+        System.out.println("Pay by Division for " + month + " " + year + ":");
+        for (Map.Entry<String, Double> entry : payByDivision.entrySet()) {
+            System.out.println("Division: " + entry.getKey() + ", Total Pay: " + entry.getValue());
+        }
+    }
+
+    public void printPayByTitle(int year, String month) {
+        Map<String, Double> payByTitle = generatePayByTitle(year, month);
+        System.out.println("Pay by Title for " + month + " " + year + ":");
+        for (Map.Entry<String, Double> entry : payByTitle.entrySet()) {
+            System.out.println("Job Title: " + entry.getKey() + ", Total Pay: " + entry.getValue());
         }
     }
 }

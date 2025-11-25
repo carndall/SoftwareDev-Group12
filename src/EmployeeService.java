@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 public class EmployeeService {
+    /*
     public List<Employee> searchEmployees(Map<String, String> searchCriteria) {
         List<Employee> employees = new ArrayList<>();
-        //Build SQL query based on search criteria
+        // Build SQL query based on search criteria
         
         try (Connection conn = SQLConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
@@ -30,7 +31,8 @@ public class EmployeeService {
         
         return employees;
     }
-
+    */
+   
     public boolean updateEmployeeSalary(Employee emp) {
         String sql = "UPDATE employees SET name = ?, ssn = ?, job_title = ?, division = ?, salary = ? WHERE empid = ?";
         
@@ -93,13 +95,13 @@ public class EmployeeService {
         }
     }
 
-    public boolean removeEmployee(int employeeID) {
+    public boolean removeEmployee(String employeeID) {
         String sql = "DELETE FROM employees WHERE empid = ?";
 
         try (Connection conn = SQLConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             
-            pstmt.setInt(1, employeeID);
+            pstmt.setString(1, employeeID);
             int affectedRows = pstmt.executeUpdate();
             return affectedRows > 0;
             
@@ -153,12 +155,11 @@ public class EmployeeService {
         return new Employee(
             rs.getString("empid"),
             rs.getString("name"),
-            rs.getString("ssn"),
             rs.getString("job_title"),
+            rs.getString("ssn"),
             rs.getString("division"),
             rs.getDouble("salary")
         );
     }
 
 }
-
