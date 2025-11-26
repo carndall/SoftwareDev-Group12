@@ -5,20 +5,35 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class EmployeeService {
-    /*
-    public List<Employee> searchEmployees(Map<String, String> searchCriteria) {
+    public List<Employee> searchEmployees(String searchType, String searchValue) {
         List<Employee> employees = new ArrayList<>();
-        // Build SQL query based on search criteria
+        String sql = "";
+        
+        // Build SQL query based on search type
+        switch (searchType.toLowerCase()) {
+            case "id":
+                sql = "SELECT * FROM employees WHERE empid LIKE ?";
+                break;
+            case "name":
+                sql = "SELECT * FROM employees WHERE name LIKE ?";
+                break;
+            case "jobtitle":
+                sql = "SELECT * FROM employees WHERE job_title LIKE ?";
+                break;
+            case "division":
+                sql = "SELECT * FROM employees WHERE division LIKE ?";
+                break;
+            default:
+                System.out.println("Invalid search type.");
+                return employees;
+        }
         
         try (Connection conn = SQLConnection.getInstance().getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             
-            for (int i = 0; i < parameters.size(); i++) {
-                pstmt.setObject(i + 1, parameters.get(i));
-            }
+            pstmt.setString(1, "%" + searchValue + "%");
             
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -31,7 +46,6 @@ public class EmployeeService {
         
         return employees;
     }
-    */
    
     public boolean updateEmployeeSalary(Employee emp) {
         String sql = "UPDATE employees SET name = ?, ssn = ?, job_title = ?, division = ?, salary = ? WHERE empid = ?";

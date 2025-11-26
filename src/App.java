@@ -1,13 +1,17 @@
+import java.sql.SQLException;
+
 public class App {
     public static void main(String[] args) throws Exception {
 
-        ReportService reportService = new ReportService();
+        ConsoleUI consoleUI = new ConsoleUI();
+        consoleUI.start();
 
-        // Report test calls
-        reportService.printEmployeeReport();
-        System.out.println();
-        reportService.printPayByDivision(2024, "January");
-        System.out.println();
-        reportService.printPayByTitle(2024, "January");
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                SQLConnection.getInstance().closeConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }));
     }
 }
