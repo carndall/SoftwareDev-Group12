@@ -44,8 +44,9 @@ public class Employee {
     }
 
     public String toString() {
-        return "Employee ID: " + employeeID + ", Name: " + name + ", Job Title: " + jobTitle +
+        return "Employee ID: " + employeeID + ", Name: " + name + ", SSN: " + ssn + ", Job Title: " + jobTitle +
                ", Division: " + division + ", Salary: " + salary;
     }
 
 }
+
